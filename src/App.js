@@ -1,25 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import React, { useEffect, useState } from 'react'
+import BigCookie from './assets/BigCookie.png'
 
 function App() {
+  const [cookies, setCookies] = useState(0)
+  const [productionRate, setProductionRate] = useState(0.1)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCookies(cookies + productionRate)
+    }, 1000)
+
+    return () => clearInterval(interval)
+  })
+
+  const handleCookieClick = () => {
+    setCookies(cookies + 1)
+  }
+
+  const upgrades = [
+    { name: 'Cursor', cost: 10, increaseRate: 0.1 }
+  ]
+
+  const buyUpgrade = upgrade => {
+    if (cookies >= upgrade.cost) {
+      setCookies(cookies - upgrade.cost)
+      setProductionRate(productionRate + upgrade.increaseRate)
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <h1>Cookie Clicker</h1>
+      <div>
+        <p>Cookies: { Math.floor(cookies) }</p>
+        <p>Production Rate: { productionRate.toFixed(2) } cookies/s</p>
+        <button
+          className="cookie"
+          onClick={ handleCookieClick }
         >
-          Learn React
-        </a>
-      </header>
+          <img src={ BigCookie } alt="Big Cookie" />
+        </button>
+      </div>
+      <div className="Upgrades">
+        <h2>Upgrades</h2>
+        {upgrades.map((upgrade, index) => (
+          <div key={ index }>
+            <p>{ upgrade.name } - Cost: { upgrade.cost } cookies</p>
+            <button onClick={() => buyUpgrade(upgrade)} disabled={cookies < upgrade.cost}>Purchase</button>
+          </div>
+        ))}
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

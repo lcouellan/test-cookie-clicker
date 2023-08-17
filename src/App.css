@@ -1,38 +1,91 @@
 .App {
   text-align: center;
+  padding: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  font-size: 24px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+p {
+  font-size: 18px;
+  margin: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Upgrades {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+.Upgrades h2 {
+  font-size: 20px;
+}
+
+.Upgrades div {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.Upgrades button {
+  font-size: 16px;
+  padding: 8px 16px;
+  background-color: #3498db;
   color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+  background-color: #27ae60;
 }
 
-.App-link {
-  color: #61dafb;
+.Upgrades button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.Upgrades button:hover {
+  background-color: #219652;
+}
+
+.cookie {
+  display: block;
+  cursor: pointer;
+  margin: auto;
+  width: 15rem;
+  height: 15rem;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.cookie > img {
+  width: 100%;
+  border-radius: 100%;
+  animation: bounce-up 0.2s;
+}
+
+.cookie:active > img {
+  animation: bounce-down 0.2s;
+}
+
+@keyframes bounce-up {
+  0% {
+    transform: scale(0.9)
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: scale(1)
+  }
+}
+@keyframes bounce-down {
+  0% {
+    transform: scale(1)
+  }
+  100% {
+    transform: scale(0.9)
   }
 }
